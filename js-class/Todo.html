@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        .todo-container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .todo-container h1 {
+            text-align: center;
+        }
+
+        .todo-input {
+            width: 380px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .todo-button {
+            width: 100%;
+            padding: 10px;
+            background-color: lightblue;
+            color: white;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .todo-list {
+            padding: 0;
+        }
+
+        .todo-item {
+            padding: 10px;
+        }
+
+        .todo-item button {
+            background-color: white;
+            border: none;
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="todo-container">
+        <h1>To-Do List</h1>
+        <input type="text" class="todo-input" placeholder="Add a new task...">
+        <button class="todo-button">Add Task</button>
+        <ul class="todo-list"></ul>
+    </div>
+
+    <script>
+        const input = document.querySelector('.todo-input');
+        const addButton = document.querySelector('.todo-button');
+        const todoList = document.querySelector('.todo-list');
+
+
+        function createTask(task) {
+            const li = document.createElement('li');
+            li.classList.add('todo-item');
+            li.textContent = task;
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'edit';
+            editButton.addEventListener('click', () => {
+                const editInput = document.createElement('input');
+                editInput.value = task;
+                li.innerHTML = '';
+                li.appendChild(editInput);
+
+
+                const saveButton = document.createElement('button');
+                saveButton.textContent = 'save';
+                saveButton.addEventListener('click', () => {
+                    const updatedTask = editInput.value.trim();
+                    if (updatedTask) {
+                        li.textContent = updatedTask;
+                        li.appendChild(editButton);
+                        li.appendChild(removeButton);
+                    }
+                    task = updatedTask
+                });
+
+                li.appendChild(saveButton);
+
+            });
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'X';
+            removeButton.addEventListener('click', () => {
+                li.remove();
+            });
+
+            li.appendChild(editButton)
+            li.appendChild(removeButton);
+            todoList.appendChild(li);
+            saveTasks([...tasks, task]);
+        }
+
+        const tasks =[] // JSON.parse(localStorage.getItem('tasks')) || [];
+        console.log(localStorage.getItem('tasks'))
+        tasks.forEach(task => createTask(task));    
+
+
+        addButton.addEventListener('click', () => {
+            const task = input.value.trim();
+            if (task) {
+                createTask(task);
+                saveTasks([...tasks, task]);
+                input.value = '';
+            }
+        });
+
+        
+            function saveTasks(tasks) {
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+        
+    </script>
+</body>
+
+</html>

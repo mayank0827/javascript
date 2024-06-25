@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .circle {
+            height: 25px;
+            width: 25px;
+            border-radius: 50%;
+            background-color: lightblue;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="score">-1</p>
+
+    <script>
+        const container = document.createElement('div');
+
+        container.style.display = 'flex';
+        container.style.justifyContent = 'center';
+        container.style.alignItems = 'center';
+        container.style.height = '300px';
+        container.style.width = '300px';
+        container.style.border = '2px solid black';
+
+        // container.textContent = 'Mayank Sharma';
+
+        // container.addEventListener('mouseenter', function () {
+        //     container.textContent = 'Gopu Jii';
+        // });
+
+        // container.addEventListener('mouseleave', function () {
+        //     container.textContent = 'Mayank Sharma';
+        // });
+
+        document.body.appendChild(container);
+
+        const circles = [];
+        let score = -1;
+
+        // create circle
+
+        
+        // console.log(circles);
+        for (let i = 0; i < 5; i++) {  
+            const circle = document.createElement('div');
+            circle.className = 'circle';
+            circles.push(circle);
+            container.appendChild(circle);
+
+            circle.addEventListener('mouseenter', function() {
+                for (let j = 0; j <= i; j++) {
+                    circles[j].style.backgroundColor = 'yellow';
+                }
+            });
+
+            circle.addEventListener('mouseleave', function() {
+                for (let j = 0; j < circles.length; j++) {
+                        circles[j].style.backgroundColor = 'lightblue';
+                }
+            });
+
+            circle.addEventListener('click', function() {
+                highlight = i
+                for (let j = 0; j <= i; j++) {
+
+                     circles[j].style.backgroundColor = 'yellow';
+                }
+            });
+        }
+
+
+
+        // const editButton = document.createElement('button');
+        //     editButton.textContent = 'edit';
+        //     editButton.addEventListener('click', () => {
+        //         const editInput = document.createElement('input');
+        //         editInput.type = 'text';
+        //         editInput.value = task;
+        //         li.innerHTML = '';
+        //         li.appendChild(editInput);
+
+        //         const saveButton = document.createElement('button');
+        //         saveButton.textContent = 'save';
+        //         saveButton.addEventListener('click', () => {
+        //             const updatedTask = editInput.value.trim();
+        //             if (updatedTask) {
+        //                 li.textContent = updatedTask;
+        //                 li.appendChild(editButton);
+        //                 li.appendChild(removeButton);
+        //             }
+        //         });
+
+        //         li.appendChild(saveButton);
+        //     });
+        
+    </script>
+</body>
+
+
+
+</html>
